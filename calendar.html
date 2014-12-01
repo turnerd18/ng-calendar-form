@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<script src="static/js/jquery-2.1.1.js"></script>
+		<script src="static/js/bootstrap.js"></script>
+		<script src="static/js/angular.js"></script>
+		<script src="static/js/app.js"></script>
+		<style>
+			#header {
+				margin-bottom: 10px;
+			}			
+		
+			#header > h2 {
+				display: inline;
+				margin-left: 275px;
+			}
+			
+			#header > button {
+				margin-right: 5px;
+			}
+		
+			table {
+				border: 1px solid black;
+				border-spacing: 0px;
+			}
+			
+			td, th {
+				border: 1px solid black;
+			}
+			
+			td > textarea {
+				margin-top: 5px;
+				width: 150px;
+				height: 100px;
+				border: 0px;
+				overflow: hidden;
+				resize: none;
+				background-color: transparent;
+			}
+			
+			.otherMonthDay {
+				background-color: rgb(201,201,201);
+			}
+						
+			@media print {    
+				.no-print, .no-print *
+				{
+					display: none !important;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div ng-app="calendarGenerator" ng-controller="calendarController">
+			<div id="header">
+				<button id="previousMonth" class="no-print" type="button" ng-click="subtractMonth()">Previous Month</button>
+				<button id="nextMonth" class="no-print" type="button" ng-click="addMonth()">Next Month</button>
+				<h2>{{monthNames[month] + ' ' + year}}</h2>
+			</div>
+			<table>
+				<tr>
+					<th ng-repeat="dayOfWeek in daysOfWeek">{{dayOfWeek}}</th>
+				</tr>
+				<tr ng-repeat="week in dates">
+					<td ng-class="date.getMonth() != month ? 'otherMonthDay' : ''" ng-repeat="date in week">{{date.shortFormat()}}<br /><textarea></textarea></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>
